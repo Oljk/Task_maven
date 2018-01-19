@@ -21,7 +21,7 @@ public class TaskThread extends Thread{
             for (Object task: list) {
                 Date date = new Date(); //по идее тут текущее время
                 Date next = ((Task) task).nextTimeAfter(date);
-                if(next!=null &&((Task) task).isActive() && (next.getTime()-date.getTime())<5){ //цыфра  зависит от того, как быстро работает комп equal не работает
+                if(next!=null &&((Task) task).isActive() && (next.getTime()-date.getTime())<5){ //цифра  зависит от того, как быстро работает комп equal не работает
                     if(helpNext.equals(next) && helpList.findEqual((Task) task) != null){ /*этот кусок кода только для того, чтобы не высвечивалось уведомление несколько раз*/
                         continue;
                     }else if(helpNext.equals(next)){

@@ -33,11 +33,16 @@
                 <configuration>
                     <archive>
                         <manifest>
+                            <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>com.company.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
+
+
+
+
         </plugins>
     </build>
 
