@@ -5,11 +5,20 @@ import com.company.model.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+/**
+ * Отвечает за текстовый вывод и взаимодействие с пользователем приложения
+ * @author olga
+ * @version 1.0
+ */
 
 public class TaskView {
+    /** Поле форматирования внешнего вида Даты для ввода/вывода*/
     private static SimpleDateFormat formatForDate =
             new SimpleDateFormat("y-MM-dd HH:mm");
+    /** Вывод меню
+     * @return String - строку, которую ввел пользователь - обозначает определенный пункт в меню
+     * @param list - Tasklist с которым работает приложение
+     * */
     public String menu(TaskList list) {
         String string;
         int index;
@@ -56,10 +65,23 @@ public class TaskView {
         }while(true);
     }
 
+    /**
+     * Вывод сообщения о том, что пользователь удет просматривать календарь
+     * @param start ссылка на стартовую дату
+     * @param end ссылка на конечкую дату
+     *            в дальнейшем обьекты по ссылкам изменятся
+     *
+     */
     public void dateForCalendar(Date start, Date end){
         System.out.print("You want to view the calendar,");
         changeDate(start, end);
     }
+
+    /**
+     * Вывод календаря за промежуток времени
+     * @param map ссылка на SortedMap, в котором хранятся задачи за введенны пользователем промежуток
+     * @return int индекст задачи, которую выбрал пользователь или 0 - возврат
+     */
     public int showCalendar(SortedMap<Date, Set<Task>> map){
         int i=1;
         for(Map.Entry entry: map.entrySet()) {
@@ -84,6 +106,12 @@ public class TaskView {
             return n;
         }while (true);
     }
+
+    /**
+     * Вывод параметром задачи + меню в вариантами возможных изменений
+     * @param task задача, параметры которой выводят
+     * @return индекс для меню - обозначает какое изменение произойдет с задачей или выход
+     */
     public int showTask(Task task){
         System.out.println(task.tell());
         System.out.println("What do you want to change?");
@@ -104,6 +132,11 @@ public class TaskView {
             return index;
         }while(true);
     }
+
+    /**
+     *Вывод удаления задачи
+     * @return 0 если пользователь не будет удалять задачу, 1 - будет
+     */
     public int deletingTask(){
         System.out.println("Are you sure you want to delete this Task?");
         do {
@@ -118,6 +151,12 @@ public class TaskView {
             return n;
         }while(true);
     }
+
+    /**
+     * Дает пользователю ввести 2 даты.
+     * @param start первая дата, которую введет пользователь
+     * @param end вторая
+     */
     public void changeDate(Date start, Date end){
         do{
             System.out.print("Enter the start date in the format \"y-MM-dd HH:mm\" :");
@@ -142,10 +181,21 @@ public class TaskView {
             }
         }while(true);
     }
+
+    /**
+     * Метод предлагает пользователю ввести title
+     * @return строку, которую ввел пользователь
+     */
     public String changeTitle(){
         System.out.print("Enter title what you want: ");
         return inputString();
     }
+
+    /**
+     * Метод для ввода interval в определенном вормате, удобном для пользователя
+     * 1 day 10 hour 17 minute 36 second
+     * @return значение интервала в секундах - int
+     */
     public int changeInterval(){
         System.out.print("Enter interval like - 1 day 10 hour 17 minute 36 second: ");
         int n;
@@ -172,6 +222,12 @@ public class TaskView {
             }
         }while(true);
     }
+
+    /**
+     * Изменяет входной параметр на противоположный и оповещает пользователя о том активным или неактивным стала задача
+     * @param b - булевая переменная, обозначает активная или нет задача
+     * @return будевое значение, противоположное b
+     */
     public boolean changeActive(boolean b){
         b = !b;
         if(b) {
@@ -181,6 +237,11 @@ public class TaskView {
         }
         return b;
     }
+
+    /**
+     * Метод для ввода активности таска, если пользователь введет 1 - активный, 0 - неактивный
+     * @return boolean -true, если таск активный, false - неактивный
+     */
     public boolean setActive(){
         do {
             System.out.print("If your Task is inactive enter 0, if your Task is active enter 1: ");
@@ -196,12 +257,25 @@ public class TaskView {
             }
         }while(true);
     }
+
+    /**
+     * Выводит пользователю сообщение о том, что ему нужно ввести данные о задаче
+     */
     public void addTask(){
         System.out.println("Enter data about your new Task: ");
     }
+
+    /**
+     * Выводит пользователю о выходе с программы
+     */
     public void exit(){
         System.out.print("Thank you for using our application.");
     }
+
+    /**
+     * статический метод, который задействует Scanner для ввоода строки
+     * @return введенную пользователем строку
+     */
     private static String inputString() {
         Scanner sc = new Scanner(System.in);
         String  n;
@@ -213,6 +287,11 @@ public class TaskView {
         }
         return n;
     }
+
+    /**
+     * статический метод для ввода индекса для меню - только интовское число
+     * @return -1, если возникло исключение(пользователь ввел некорректные данные) или int, который ввел пользователь
+     */
     private static int inputIndex() {
         Scanner sc = new Scanner(System.in);
         int  n;

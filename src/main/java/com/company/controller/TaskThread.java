@@ -4,13 +4,40 @@ import com.company.model.*;
 
 import java.util.Date;
 
+/**
+ * Класс описывает поток, который все время проверяет, если ли таск, который должен выполнится в это время
+ * @author olga
+ * @version 1.0
+ */
 public class TaskThread extends Thread{
+    /**
+     * тасклист, с которым работает программа
+     */
     TaskList list;
-    Date helpNext = new Date(20); //дата, которая последняя была активной, в начале будет там 1970 года, чтобы было что для сравнения
-    TaskList helpList = new LinkedTaskList(); //лист тасков, которые были в эту активную дату(в один момет может быть два таска одновременно)
+    /**
+     * дата, которая последняя была активной, в начале будет 1970 года, чтобы было что для сравнения
+     */
+    Date helpNext = new Date(20);
+    /**
+     * лист тасков, которые были в эту активную дату
+     * (в один момет может быть два таска одновременно)
+     */
+    TaskList helpList = new LinkedTaskList();
+
+    /**
+     * Конструктор, создает обьект класса
+     * @param list с которым рабоает приложение, создается в com.company.controller.TaskController
+     */
     public TaskThread(TaskList list) {
       this.list = list;
     }
+
+    /**
+     * Перегруженный метод run
+     * Все время бесконечным циклом проверяет если ли в list таски, которые должны исполнятся в текущее время
+     * цикл прекращается, если поток прерван(isInterrupted())
+     * поток прерывается в методе com.company.controller.TaskController.exit();
+     */
     @Override
     public void run() {
         int i=0;
