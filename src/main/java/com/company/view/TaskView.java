@@ -153,6 +153,12 @@ public class TaskView {
     }
 
     /**
+     * Приветствие
+     */
+    public void welcome(){
+        System.out.println("Welcome to our app!");
+    }
+    /**
      * Дает пользователю ввести 2 даты.
      * @param start первая дата, которую введет пользователь
      * @param end вторая
@@ -177,7 +183,7 @@ public class TaskView {
                 end.setTime(st.getTime());
                 break;
             } catch (ParseException e) {
-                System.out.println("Yoe entered smth wrong, try again");
+                System.out.println("You entered smth wrong, try again");
             }
         }while(true);
     }

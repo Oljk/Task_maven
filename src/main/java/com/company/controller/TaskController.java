@@ -47,6 +47,7 @@ public class TaskController {
         }
         myTaskThread = new TaskThread(list);;
         myTaskThread.start();
+        this.view.welcome();
     }
     /** Прописана логика меню
      * вызываются методы календаря, добавления задачи, просмотра задачи и выхода с программы */

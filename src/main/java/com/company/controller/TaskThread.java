@@ -40,15 +40,14 @@ public class TaskThread extends Thread{
      */
     @Override
     public void run() {
-        int i=0;
         while(true){
             if(this.isInterrupted()){
                 break;
             }
             for (Object task: list) {
-                Date date = new Date(); //по идее тут текущее время
+                Date date = new Date(); //тут текущее время
                 Date next = ((Task) task).nextTimeAfter(date);
-                if(next!=null &&((Task) task).isActive() && (next.getTime()-date.getTime())<5){ //цифра  зависит от того, как быстро работает комп equal не работает
+                if(next!=null &&((Task) task).isActive() && (next.getTime()-date.getTime())<7){ //цифра  зависит от того, как быстро работает комп equal не работает
                     if(helpNext.equals(next) && helpList.findEqual((Task) task) != null){ /*этот кусок кода только для того, чтобы не высвечивалось уведомление несколько раз*/
                         continue;
                     }else if(helpNext.equals(next)){
@@ -59,8 +58,8 @@ public class TaskThread extends Thread{
                         helpList.add((Task) task);
                     }
                     synchronized (((Task) task)){
-                        System.out.println("\n" + i + " Now you must complete this task: " + ((Task) task).tell() + "\nContinue working with the program.");
-                        i++; //просто для наглядности, при проверке работоспособности
+                        System.out.println("\n"+  "Now you must complete this task: " + ((Task) task).tell() + "\nContinue working with the program.");
+
                     }
                 }
             }
