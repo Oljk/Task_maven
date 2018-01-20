@@ -1,21 +1,49 @@
 package com.company.model;
+/**
+ * Наследник TaskList реализует хранение задач по логике LinkedList
+ * @author olga
+ * @version 1.0
+ * @see com.company.model.TaskList
+ * @see com.company.model.ArrayTaskList
+ */
 
 public class LinkedTaskList extends TaskList {
+    /**
+     * Начальный узел
+     */
     private Node head = null;
+    /**
+     * Конечный узел
+     */
     private Node tail = null;
-    //private int size;
 
+    /**
+     * внутренний класс Узел
+     */
     public class Node {
+        /**
+         * ссылка на саму задача(Task)
+         */
         private Task value;
+        /**
+         * Ссылка на следующий узел
+         */
         private Node next;
+        /**
+         * Ссылка на предыдущий узел
+         */
         private Node prev;
+
+        /**
+         * Конструктор, создает обьект класса
+         * @param task - ссылка на задачу, которая записывается в значение узла
+         */
         private Node(Task task) {
             value = task;
         }
     }
 
     public void add(Task task) {
-
         if (task == null) return;
         Node node = new Node(task);
         Node h;
@@ -30,8 +58,8 @@ public class LinkedTaskList extends TaskList {
         }
         size++;
     }
-    public boolean remove(Task task) {
 
+    public boolean remove(Task task) {
         Node current = head;
         while (current != null) {
             if (current.value.equals(task)) {
@@ -69,7 +97,7 @@ public class LinkedTaskList extends TaskList {
         return new LinkedTaskList();
     }
 
-    public Task getTask(int index) /*throws TaskEx*/ {
+    public Task getTask(int index) {
         if (index < 0) return new Task();
         if (head == null) return new Task();
         Node node = head;
@@ -80,8 +108,8 @@ public class LinkedTaskList extends TaskList {
             node = node.next;
         }
         return new Task();
-       /* throw new TaskEx("Too big index");*/
     }
+
     public void clear() {
         head = null;
         tail = null;

@@ -2,35 +2,61 @@ package com.company.model;
 
 import java.util.Iterator;
 import java.io.Serializable;
+/**
+ * Абстрактный класс, который реализует хранение задач
+ * @author olga
+ * @version 1.0
+ * @see com.company.model.LinkedTaskList
+ * @see com.company.model.ArrayTaskList
+ */
 public abstract class TaskList implements Iterable, Cloneable, Serializable {
+    /**
+     * Переменная, в которой хранится размер массива
+     */
     protected int size;
     public   TaskList() { }
+
+    /**
+     * Добавление задачи в лист
+     * @param task ссылка на задачу, которая добавляется
+     */
     public abstract void add(Task task);
+
+    /**
+     * @return размер массива
+     */
     public abstract int size();
-    public abstract TaskList newList(); /*new*/
-    public abstract Task getTask(int index)/* throws TaskEx*/;
+
+    /**
+     * @return новый обьект класса-наследника
+     */
+    public abstract TaskList newList();
+
+    /**
+     * @param index - индекс в массиве
+     * @return ссылку на задачу по индексу в массиве
+     */
+    public abstract Task getTask(int index);
+
+    /**
+     * @param task ссылка на задачу, которая удаляется
+     * @return true - если удаление прошло успешно
+     */
     public abstract boolean remove(Task task);
+
+    /**
+     * Очищает лист
+     */
     public abstract void clear();
 
-    /*  public  TaskList incoming(Date from, Date to) {
-          TaskList myArray = newList();
-
-          for (int i = 0; i < this.size(); i++) {
-              Date nextTime = new Date();
-              try {
-                  nextTime = this.getTask(i).nextTimeAfter(from);
-              } catch (Exception e) {}
-
-              if (nextTime.before(to) && nextTime != null) {
-                  try {
-                      myArray.add(this.getTask(i));
-                  } catch (Exception e) { }
-              }
-          }
-          return myArray;
-      }
-  */
+    /**
+     * Внутренний класс, который реализует интерфейс Iterator
+     * @see java.util.Iterator
+     */
     private class  myIterator implements Iterator {
+        /**
+         * текущий индекс элемента
+         */
         private int currentIndex = -1;
         myIterator() {
         }
@@ -86,6 +112,11 @@ public abstract class TaskList implements Iterable, Cloneable, Serializable {
         }
         return true;
     }
+
+    /** находит точно такую же задачу-копию в листе
+     * @param task ссылка на задачу
+     * @return копию приходящей задачи, если она есть, если нет - null
+     */
     public Task findEqual(Task task){
         for (Object o:this) {
             if(((Task)o).equals(task)) return ((Task)o);
@@ -99,8 +130,6 @@ public abstract class TaskList implements Iterable, Cloneable, Serializable {
         } catch (CloneNotSupportedException ex) {
             throw new InternalError();
         }
-      /*  if (this.getClass() == LinkedTaskList.class) {
-        }*/
         link.clear();
         Iterator it = this.iterator();
         while (it.hasNext()) {

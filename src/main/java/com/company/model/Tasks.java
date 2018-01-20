@@ -1,25 +1,13 @@
 package com.company.model;
 import java.util.*;
 
+/**
+ * Класс со статическими методами для работы с Iterable<Task>
+ *  @author olga
+ * @version 1.0
+ */
 public class Tasks {
     public static Iterable<Task> incoming(Iterable<Task> tasks, Date from, Date to) {
-     /*   try {
-            myArray = tasks.getClass().newInstance();
-        }
-        catch(Exception e){}*/
-
-           /* for (int i = 0; i < this.size(); i++) {
-                Date nextTime = new Date();
-                try {
-                    nextTime = this.getTask(i).nextTimeAfter(from);
-                } catch (Exception e) {}
-
-                if (nextTime.before(to) && nextTime != null) {
-                    try {
-                        myArray.add(this.getTask(i));
-                    } catch (Exception e) { }
-                }
-            }*/
         if (tasks == null || to == null || from == null) return null;
         Iterator it = tasks.iterator();
         while (it.hasNext()) {
@@ -73,7 +61,6 @@ public class Tasks {
                     map.put((Date) nextTime.clone(), myset);
                 }
             }
-
         }
         return map;
     }

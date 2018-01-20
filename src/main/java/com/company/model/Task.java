@@ -3,15 +3,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.Serializable;
 
+/**
+ * Класс, в котором хранятся все параметры задачи
+ * @author olga
+ * @version 1.0
+ */
 public class Task implements Cloneable, Serializable {
     private String titlle;
     private  boolean isactive;
-    private  int interval; //seconds in tests
+    /**
+     * интервал в секундах
+     */
+    private  int interval;
+    /**
+     * Дата в int формате
+     */
     private int start;
     private  int end;
     private  Date end_;
     private  Date start_;
-    private  boolean isrep = false;
+    /**
+     * Паттерн для даты
+     */
     private static SimpleDateFormat formatForDate =
             new SimpleDateFormat("[yyyy-MM-dd  HH:mm:ss.SSS]");
     public Task(String titlle) {
@@ -58,16 +71,15 @@ public class Task implements Cloneable, Serializable {
     public Date getStartTime() {
         return start_;
     }
+
     public Date getEndTime() {
         return end_;
-
     }
     public  int getRepeatInterval() {
         return interval;
     }
 
     public void setTime(Date start, Date end, int interval) {
-        //   if (interval <= 0) interval = 10;
         this.start_ = (Date) start.clone();
         this.end_ = (Date) end.clone();
         this.interval = interval;
@@ -77,7 +89,7 @@ public class Task implements Cloneable, Serializable {
         return false;
     }
     public Date nextTimeAfter(Date current) {
-        if (!isactive) return null; //Chto Vozvraschatj vmesto -1???
+        if (!isactive) return null;
         if (interval == 0) {
             if (current.before(start_)) return start_;
             return null;
@@ -94,7 +106,6 @@ public class Task implements Cloneable, Serializable {
     public String getTitle() {
         return titlle;
     }
-
 
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,7 +144,12 @@ public class Task implements Cloneable, Serializable {
         }
         return  s;
     }
-    public String tell() { //+
+
+    /**
+     * Метод, который создает строке - описание задачи в корректном для пользователя виде
+     * @return строку
+     */
+    public String tell() {
         String s = "Task: " + titlle ;
         if(isactive) {
             s += ", active, ";

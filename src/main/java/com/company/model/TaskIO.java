@@ -8,7 +8,16 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Класс для работы с потоками записи и считывания, и файлами
+ * @author olga
+ * @version 1.0
+ */
+
 public class TaskIO {
+    /**
+     * Шаблон для даты
+     */
     private static SimpleDateFormat formatForDate =
             new SimpleDateFormat("'['y-MM-dd  HH:mm:ss.SSS']'");
     public static void write(TaskList tasks, OutputStream out)
@@ -83,6 +92,12 @@ public class TaskIO {
             throw new TaskIOException("IOException in write(TaskList tasks, Writer out) method, try to close", e);
         }
     }
+
+    /**
+     * Статический метод превращает интервал в секундах - в строчную запись в виде 1 day 10 hour 17 minute 36 second
+     * @param i интервал в секундах
+     * @return строку
+     */
     public static String interval(int i) {
         StringBuilder st = new StringBuilder();
         if (i / 86400 > 0) {
@@ -100,8 +115,18 @@ public class TaskIO {
         st.append((i) + " second");
         return st.toString();
     }
+
+    /**
+     * шаблон для поиска названия задачи
+     */
     private static String titl_pattern = "^\"([\\S\\s^\"]+)\"";
+    /**
+     * шаблон для поиска даты
+     */
     private static String date_pattern = "\\[[\\d.:\\-\\s]+\\]";
+    /**
+     * шаблон для поиска активности/неактивности задачи
+     */
     private static String inactive_pattern = "inactive";
     public static void read(TaskList tasks, Reader in) throws TaskIOException {
         tasks.clear();
@@ -158,6 +183,12 @@ public class TaskIO {
             throw new TaskIOException("ParseException in read(TaskList tasks, Reader in)", e);
         }
     }
+
+    /**
+     * переводит со строки в инт значение интервал в секундах
+     * @param s - строка интервала в виде 1 day 10 hour 17 minute 36 second
+     * @return значение интервала в секундах
+     */
     public static int parse_interval(String s) {
         Pattern p = Pattern.compile("((\\d)+)\\sday");
         Matcher m =  p.matcher(s);

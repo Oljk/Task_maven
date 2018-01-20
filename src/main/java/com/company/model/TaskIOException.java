@@ -1,6 +1,13 @@
 package com.company.model;
 
-public class TaskIOException extends Exception { //exc in TaskOI.java supposedly
+/**
+ * Исключение, которое выбрасывает TaskIO методы при работе с файлами
+ * @see com.company.model.TaskIO
+ * @see java.lang.Exception
+ * @author olga
+ * @version 1.0
+ */
+public class TaskIOException extends Exception {
     public TaskIOException(String message, Throwable cause) {
         super(message, cause);
     }

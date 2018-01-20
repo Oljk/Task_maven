@@ -1,4 +1,11 @@
 package com.company.model;
+/**
+ * Наследник TaskList реализует хранение задач по логике ArrayList
+ * @author olga
+ * @version 1.0
+ * @see com.company.model.TaskList
+ * @see com.company.model.LinkedTaskList
+ */
 
 public class ArrayTaskList  extends TaskList  {
     private Task[] TaskArray = new Task[Count];
@@ -28,8 +35,7 @@ public class ArrayTaskList  extends TaskList  {
     }
 
 
-    public Task getTask(int index)/* throws TaskEx*/ {
-       /* if (index >= size) throw new TaskEx("Too big index");*/
+    public Task getTask(int index) {
         if (index >= size) return new Task();
         return TaskArray[index];
     }
