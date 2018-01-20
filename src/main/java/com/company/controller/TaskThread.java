@@ -13,16 +13,16 @@ public class TaskThread extends Thread{
     /**
      * тасклист, с которым работает программа
      */
-    TaskList list;
+   private TaskList list;
     /**
      * дата, которая последняя была активной, в начале будет 1970 года, чтобы было что для сравнения
      */
-    Date helpNext = new Date(20);
+   private Date helpNext = new Date(20);
     /**
      * лист тасков, которые были в эту активную дату
      * (в один момет может быть два таска одновременно)
      */
-    TaskList helpList = new LinkedTaskList();
+    private TaskList helpList = new LinkedTaskList();
 
     /**
      * Конструктор, создает обьект класса

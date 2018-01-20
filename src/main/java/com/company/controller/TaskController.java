@@ -18,13 +18,13 @@ public class TaskController {
     /** Logger log4j*/
     final static Logger logger = Logger.getLogger(TaskController.class);
     /** обьект класса TaskView, методы которого будут использоваться для взаимодействия с пользователем*/
-    TaskView view;
+    private TaskView view;
     /** TaskList в котором хранятся все задачи пользователя*/
-    TaskList list;
+    private TaskList list;
     /**Файл, в котором хранится тасклист*/
-    File dan;
+    private File dan;
     /**Поток, который работает паралелльно и отвечает за уведомление пользователя о текущей задаче*/
-    Thread myTaskThread;
+    private Thread myTaskThread;
     /** Конструктор, создает обьект класса
      * @param view обьект класса TaskView
      * @param file файл, в котором будут хранится данные
