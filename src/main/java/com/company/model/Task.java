@@ -18,14 +18,14 @@ public class Task implements Cloneable, Serializable {
     /**
      * Дата в int формате
      */
-    private int start;
-    private  int end;
+    //private int start;
+    //private  int end;
     private  Date end_;
     private  Date start_;
     /**
      * Паттерн для даты
      */
-    private static SimpleDateFormat formatForDate =
+    private static final SimpleDateFormat formatForDate =
             new SimpleDateFormat("[yyyy-MM-dd  HH:mm:ss.SSS]");
     public Task(String titlle) {
         this.titlle = titlle;
@@ -85,8 +85,7 @@ public class Task implements Cloneable, Serializable {
         this.interval = interval;
     }
     public boolean isRepeated() {
-        if (interval > 0) return true;
-        return false;
+        return interval > 0;
     }
     public Date nextTimeAfter(Date current) {
         if (!isactive) return null;
@@ -107,21 +106,18 @@ public class Task implements Cloneable, Serializable {
         return titlle;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || o.getClass() != Task.class) return false;
-        Task x1 = (Task) o;
-        if (x1.start_ == null)
-            if (this.titlle == null && x1.titlle != null) return false;
-        if (x1.titlle == null && this.titlle != null) return false;
-        if (this.start_ == null && x1.start_ != null) return false;
-        if (x1.start_ == null && this.start_ != null) return false;
-        if (this.end_ == null && x1.end_ != null) return false;
-        if (x1.end_ == null && this.end_ != null) return false;
-        if ((x1.titlle.equals(this.titlle)) && x1.isactive == this.isactive && this.interval == x1.interval
-                && this.start_.equals(x1.start_) && this.end_.equals(x1.end_) && this.start == x1.start
-                && this.end == x1.end) return true;
-        return false;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (isactive != task.isactive) return false;
+        if (interval != task.interval) return false;
+        if (titlle != null ? !titlle.equals(task.titlle) : task.titlle != null) return false;
+        if (end_ != null ? !end_.equals(task.end_) : task.end_ != null) return false;
+        return start_ != null ? start_.equals(task.start_) : task.start_ == null;
     }
 
     public int hashCode() {
@@ -133,12 +129,12 @@ public class Task implements Cloneable, Serializable {
         }
         if (start_ != null) hash += start_.hashCode() + end_.hashCode();
         if (isactive) hash++;
-        return hash + interval * 3 + start * 2 + end * 4;
+        return hash + interval * 3;
     }
     public Task() {
     }
     public String toString() {
-        String s = "title: " + titlle + ", is active: " + isactive + ", start:  " + start + ",end: " + end + ", interval: " + interval;
+        String s = "title: " + titlle + ", is active: " + isactive + ", interval: " + interval;
         if (start_ != null && end_ != null) {
             s = s + ", start_d - " + formatForDate.format(start_) + ", end_d " + formatForDate.format(end_);
         }

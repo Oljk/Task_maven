@@ -45,7 +45,8 @@ public class TaskController {
         } catch (TaskIOException e) {
             logger.error("TaskIOExc in reading " + e);
         }
-        myTaskThread = new TaskThread(list);;
+        myTaskThread = new TaskThread(list);
+        myTaskThread.setDaemon(true);
         myTaskThread.start();
         this.view.welcome();
     }
@@ -141,7 +142,7 @@ public class TaskController {
                     myTask.setActive(view.changeActive(myTask.isActive()));
                     break;
                 case 5:
-                    if(view.deletingTask()==1){
+                    if(view.deletingTask()){
                         list.remove(myTask);
                         editFile();
                         return;

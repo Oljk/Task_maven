@@ -119,7 +119,7 @@ public abstract class TaskList implements Iterable, Cloneable, Serializable {
      */
     public Task findEqual(Task task){
         for (Object o:this) {
-            if(((Task)o).equals(task)) return ((Task)o);
+            if((o).equals(task)) return ((Task)o);
         }
         return null;
     }

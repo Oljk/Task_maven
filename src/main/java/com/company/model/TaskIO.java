@@ -18,7 +18,7 @@ public class TaskIO {
     /**
      * Шаблон для даты
      */
-    private static SimpleDateFormat formatForDate =
+    private static final SimpleDateFormat formatForDate =
             new SimpleDateFormat("'['y-MM-dd  HH:mm:ss.SSS']'");
     public static void write(TaskList tasks, OutputStream out)
             throws TaskIOException {
@@ -119,15 +119,15 @@ public class TaskIO {
     /**
      * шаблон для поиска названия задачи
      */
-    private static String titl_pattern = "^\"([\\S\\s^\"]+)\"";
+    private static final String titl_pattern = "^\"([\\S\\s^\"]+)\"";
     /**
      * шаблон для поиска даты
      */
-    private static String date_pattern = "\\[[\\d.:\\-\\s]+\\]";
+    private static final String date_pattern = "\\[[\\d.:\\-\\s]+\\]";
     /**
      * шаблон для поиска активности/неактивности задачи
      */
-    private static String inactive_pattern = "inactive";
+    private static final String inactive_pattern = "inactive";
     public static void read(TaskList tasks, Reader in) throws TaskIOException {
         tasks.clear();
         StringBuffer s2;
@@ -153,7 +153,7 @@ public class TaskIO {
                 if (m.find()) {
                     find = m.group().replaceAll("\"\"", "\"");
                     help.setTitle(find.substring(1, find.length() - 1));
-                } // tut ya dobavila title
+                } // add title
                 p = Pattern.compile(date_pattern);
                 m = p.matcher(st);
                 if (m.find()) {

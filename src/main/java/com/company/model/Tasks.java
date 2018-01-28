@@ -21,7 +21,7 @@ public class Tasks {
     }
 
     public static SortedMap<Date, Set<Task>> calendar(Iterable<Task> tasks, Date start, Date end) {
-        SortedMap<Date, Set<Task>> map = new TreeMap<Date, Set<Task>>();
+        SortedMap<Date, Set<Task>> map = new TreeMap<>();
         if (tasks == null || start == null || end == null) return null;
         Iterator it = incoming(tasks, start, end).iterator();
         while (it.hasNext()) {
@@ -41,13 +41,13 @@ public class Tasks {
                     }
                     helpTime = i.getTime() + currentTask.getRepeatInterval() * 1000;
                     if (!map.containsKey(i)) {
-                        Set<Task> kek = new HashSet<Task>();
+                        Set<Task> kek = new HashSet<>();
                         kek.add(currentTask.clone());
                         map.put((Date) i.clone(), kek);
                     }
                 }
             } else {
-                Set<Task> myset = new HashSet<Task>();
+                Set<Task> myset = new HashSet<>();
                 if (map.containsKey(nextTime)) {
                     for (Map.Entry<Date, Set<Task>> pair : map.entrySet()) {
                         if (pair.getKey().equals(nextTime)) {
