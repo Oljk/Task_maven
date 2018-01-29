@@ -5,38 +5,37 @@ import com.company.model.*;
 import java.util.Date;
 
 /**
- * Класс описывает поток, который все время проверяет, если ли таск, который должен выполнится в это время
+ * A class describes a thread that checks all the time if there is a task to be executed at this time
  * @author olga
  * @version 1.0
  */
 public class TaskThread extends Thread{
     /**
-     * тасклист, с которым работает программа
+     * Tasklist with which the program works
      */
    private TaskList list;
     /**
-     * дата, которая последняя была активной, в начале будет 1970 года, чтобы было что для сравнения
+     * the date the latest was active, in starting will be 1970 year - to have smth to compare
      */
    private Date helpNext = new Date(20);
     /**
-     * лист тасков, которые были в эту активную дату
-     * (в один момет может быть два таска одновременно)
+     * tasklist of the task was active in this active-specific
+     * ()
      */
     private TaskList helpList = new LinkedTaskList();
 
-    /**
-     * Конструктор, создает обьект класса
-     * @param list с которым рабоает приложение, создается в com.company.controller.TaskController
+    /** Constructor, creates an object of the class
+     * @param list with which the application is working, was created in com.company.controller.TaskController
      */
     public TaskThread(TaskList list) {
       this.list = list;
     }
 
     /**
-     * Перегруженный метод run
-     * Все время бесконечным циклом проверяет если ли в list таски, которые должны исполнятся в текущее время
-     * цикл прекращается, если поток прерван(isInterrupted())
-     * поток прерывается в методе com.company.controller.TaskController.exit();
+     * Overrided method run
+     * All the time, an infinite loop checks if there are in the list task, that should be executed in current time
+     * the loop stopped, when the thread is Interrupted
+     * the thread interropts in the method com.company.controller.TaskController.exit();
      */
     @Override
     public void run() {
