@@ -1,6 +1,6 @@
 package com.company.model;
 /**
- * Наследник TaskList реализует хранение задач по логике ArrayList
+ * child of TaskList class that implements the storage of tasks by ArrayList logic
  * @author olga
  * @version 1.0
  * @see com.company.model.TaskList
@@ -9,7 +9,7 @@ package com.company.model;
 
 public class ArrayTaskList  extends TaskList  {
     private Task[] TaskArray = new Task[Count];
-    //private int size;
+
     private static final int Count = 10;
 
     public ArrayTaskList() {

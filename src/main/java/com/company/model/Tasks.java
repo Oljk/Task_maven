@@ -2,7 +2,7 @@ package com.company.model;
 import java.util.*;
 
 /**
- * Класс со статическими методами для работы с Iterable<Task>
+ * Class with static methods for working with Iterable<Task>
  *  @author olga
  * @version 1.0
  */

@@ -3,7 +3,7 @@ package com.company.model;
 import java.util.Iterator;
 import java.io.Serializable;
 /**
- * Абстрактный класс, который реализует хранение задач
+ * An abstract class that implements the storage of tasks
  * @author olga
  * @version 1.0
  * @see com.company.model.LinkedTaskList
@@ -11,51 +11,48 @@ import java.io.Serializable;
  */
 public abstract class TaskList implements Iterable, Cloneable, Serializable {
     /**
-     * Переменная, в которой хранится размер массива
+     * size of tasklist
      */
     protected int size;
     public   TaskList() { }
 
-    /**
-     * Добавление задачи в лист
-     * @param task ссылка на задачу, которая добавляется
-     */
+    /**@param task link on the task, which is adding*/
     public abstract void add(Task task);
 
     /**
-     * @return размер массива
+     * @return size of list
      */
     public abstract int size();
 
     /**
-     * @return новый обьект класса-наследника
+     * @return new object of child-class
      */
     public abstract TaskList newList();
 
     /**
-     * @param index - индекс в массиве
-     * @return ссылку на задачу по индексу в массиве
+     * @param index in list
+     * @return link of the task by index in list
      */
     public abstract Task getTask(int index);
 
     /**
-     * @param task ссылка на задачу, которая удаляется
-     * @return true - если удаление прошло успешно
+     * @param task link of the task is deleting
+     * @return true - if deleting was successfully
      */
     public abstract boolean remove(Task task);
 
     /**
-     * Очищает лист
+     * clear the list completely
      */
     public abstract void clear();
 
     /**
-     * Внутренний класс, который реализует интерфейс Iterator
+     * inner class, that implements Iterator
      * @see java.util.Iterator
      */
     private class  myIterator implements Iterator {
         /**
-         * текущий индекс элемента
+         * current index of element
          */
         private int currentIndex = -1;
         myIterator() {
@@ -113,9 +110,9 @@ public abstract class TaskList implements Iterable, Cloneable, Serializable {
         return true;
     }
 
-    /** находит точно такую же задачу-копию в листе
-     * @param task ссылка на задачу
-     * @return копию приходящей задачи, если она есть, если нет - null
+    /** find equal task in list
+     * @param task link of the rask
+     * @return equal task in the list, if it exist, if no - null
      */
     public Task findEqual(Task task){
         for (Object o:this) {

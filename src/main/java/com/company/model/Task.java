@@ -4,7 +4,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * Класс, в котором хранятся все параметры задачи
+ * The class in which all the parameters of the task are stored
  * @author olga
  * @version 1.0
  */
@@ -12,18 +12,18 @@ public class Task implements Cloneable, Serializable {
     private String titlle;
     private  boolean isactive;
     /**
-     * интервал в секундах
+     * interval of repeating task in seconds
      */
     private  int interval;
     /**
-     * Дата в int формате
+     * date in the int format  - now not using
      */
     //private int start;
     //private  int end;
     private  Date end_;
     private  Date start_;
     /**
-     * Паттерн для даты
+     * Pattern for date
      */
     private static final SimpleDateFormat formatForDate =
             new SimpleDateFormat("[yyyy-MM-dd  HH:mm:ss.SSS]");
@@ -142,8 +142,8 @@ public class Task implements Cloneable, Serializable {
     }
 
     /**
-     * Метод, который создает строке - описание задачи в корректном для пользователя виде
-     * @return строку
+     * Method, make String - the description of the task in comfortable for user view
+     * @return string
      */
     public String tell() {
         String s = "Task: " + titlle ;

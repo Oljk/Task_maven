@@ -1,6 +1,6 @@
 package com.company.model;
 /**
- * Наследник TaskList реализует хранение задач по логике LinkedList
+ * child of TaskList class that implements the storage of tasks by LinkedList logic
  * @author olga
  * @version 1.0
  * @see com.company.model.TaskList
@@ -9,34 +9,34 @@ package com.company.model;
 
 public class LinkedTaskList extends TaskList {
     /**
-     * Начальный узел
+     * start node
      */
     private Node head = null;
     /**
-     * Конечный узел
+     * end node
      */
     private Node tail = null;
 
     /**
-     * внутренний класс Узел
+     * inner class node
      */
     public class Node {
         /**
-         * ссылка на саму задача(Task)
+         * link of current task
          */
         private Task value;
         /**
-         * Ссылка на следующий узел
+         * link on the next node
          */
         private Node next;
         /**
-         * Ссылка на предыдущий узел
+         * link on the previous node
          */
         private Node prev;
 
         /**
-         * Конструктор, создает обьект класса
-         * @param task - ссылка на задачу, которая записывается в значение узла
+         * constructor, make an object of the class
+         * @param task - lik on the task - value
          */
         private Node(Task task) {
             value = task;

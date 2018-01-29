@@ -1,7 +1,7 @@
 package com.company.model;
 
 /**
- * Исключение, которое выбрасывает TaskIO методы при работе с файлами
+ * The exception that throws TaskIO methods in working with files
  * @see com.company.model.TaskIO
  * @see java.lang.Exception
  * @author olga

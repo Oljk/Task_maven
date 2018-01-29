@@ -9,14 +9,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Класс для работы с потоками записи и считывания, и файлами
+ * Class for working with streams of writing and reading, and files
  * @author olga
  * @version 1.0
  */
 
 public class TaskIO {
     /**
-     * Шаблон для даты
+     * Pattern for date
      */
     private static final SimpleDateFormat formatForDate =
             new SimpleDateFormat("'['y-MM-dd  HH:mm:ss.SSS']'");
@@ -94,9 +94,9 @@ public class TaskIO {
     }
 
     /**
-     * Статический метод превращает интервал в секундах - в строчную запись в виде 1 day 10 hour 17 minute 36 second
-     * @param i интервал в секундах
-     * @return строку
+     * The static method converts the interval in seconds - to a String  in the form: 1 day 10 hour 17 minute 36 second
+     * @param i interval in seconds
+     * @return string in right format
      */
     public static String interval(int i) {
         StringBuilder st = new StringBuilder();
@@ -117,15 +117,15 @@ public class TaskIO {
     }
 
     /**
-     * шаблон для поиска названия задачи
+     * pattern for searching title
      */
     private static final String titl_pattern = "^\"([\\S\\s^\"]+)\"";
     /**
-     * шаблон для поиска даты
+     * pattern for searching date
      */
     private static final String date_pattern = "\\[[\\d.:\\-\\s]+\\]";
     /**
-     * шаблон для поиска активности/неактивности задачи
+     * pattern for searching active/inactive of the task
      */
     private static final String inactive_pattern = "inactive";
     public static void read(TaskList tasks, Reader in) throws TaskIOException {
@@ -185,9 +185,9 @@ public class TaskIO {
     }
 
     /**
-     * переводит со строки в инт значение интервал в секундах
-     * @param s - строка интервала в виде 1 day 10 hour 17 minute 36 second
-     * @return значение интервала в секундах
+     * convert from the String to the Int the value of the interval in seconds
+     * @param s - String of the interval in format 1 day 10 hour 17 minute 36 second
+     * @return value of the interval in seconds
      */
     public static int parse_interval(String s) {
         Pattern p = Pattern.compile("((\\d)+)\\sday");
