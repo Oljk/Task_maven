@@ -10,6 +10,5 @@ public class Main {
         File dan = new File("dan.txt");
         TaskView view = new TaskView();
         TaskController controller = new TaskController(view, dan);
-        controller.menu();
     }
 }

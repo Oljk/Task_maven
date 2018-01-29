@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 /**
-* Отвечает за логику работы приложения
+* Logic of working the application
 * @author olga
 * @version 1.0
  */
@@ -17,17 +17,17 @@ import java.util.*;
 public class TaskController {
     /** Logger log4j*/
     final static Logger logger = Logger.getLogger(TaskController.class);
-    /** обьект класса TaskView, методы которого будут использоваться для взаимодействия с пользователем*/
+    /** A Task View object whose methods will be used to interact with the user*/
     private TaskView view;
-    /** TaskList в котором хранятся все задачи пользователя*/
+    /** TaskList - saves all Tasks of the usser*/
     private TaskList list;
-    /**Файл, в котором хранится тасклист*/
+    /**file - saves the tasklist*/
     private File dan;
-    /**Поток, который работает паралелльно и отвечает за уведомление пользователя о текущей задаче*/
+    /**A thread that works in parallel and is responsible for notifying the user of the current task*/
     private Thread myTaskThread;
-    /** Конструктор, создает обьект класса
-     * @param view обьект класса TaskView
-     * @param file файл, в котором будут хранится данные
+    /** Constructor, creates an object of the class
+     * @param view object of the class TaskView
+     * @param file the file in which this tasklist will be saved
      * */
     public TaskController(TaskView view, File file) {
         this.view = view;
@@ -49,11 +49,11 @@ public class TaskController {
         myTaskThread.setDaemon(true);
         myTaskThread.start();
         this.view.welcome();
+        this.menu();
     }
-    /** Прописана логика меню
-     * вызываются методы календаря, добавления задачи, просмотра задачи и выхода с программы */
-
-    public void menu(){
+    /** The logic of the menu
+     * called  methods of the calendar, adding a task, viewing the task and exiting the program */
+    private void menu(){
         do {
             String menu = view.menu(list);
             int index;
@@ -83,7 +83,7 @@ public class TaskController {
             }
         }while(true);
     }
-    /** метод, который записывает list в файл dan*/
+    /** method writes list in the file dan*/
     private void editFile(){
         try {
             TaskIO.writeText(list, dan);
@@ -91,12 +91,12 @@ public class TaskController {
             logger.error("TaskIOExc in editing ", e);
         }
     }
-    /**Метод просмотра календаря
-     * пользователь вводит две даты
-     * получает вывод календаря в виде дата - все задачи
-     * может выбрать задачу и посмотреть ее параметры:
-     * */
-    public void calendar() {
+    /** method to view the calendar
+     * user enters 2 dates
+     * gets caledar in the view: date - tasks on this date
+     * can choose the task and see its parametrs
+     */
+    private  void calendar() {
         int index;
         Date start = new Date();
         Date end = new Date();
@@ -109,18 +109,17 @@ public class TaskController {
         do {
             index = view.showCalendar(mymap);
             if (index == 0) {
-                return; //возврат в меню
+                return; //return to menu
             } else {
-                Task myTask = inMapByIndex(mymap, index); //нашла таск в календаре, но это копия
-                myTask = list.findEqual(myTask); //теперь ссылка на тот таск, который в листе
+                Task myTask = inMapByIndex(mymap, index); //find task in calendar, but it is a copy
+                myTask = list.findEqual(myTask); //link on the task in this taskList
                 showAndEditTask(myTask);
             }
         }while(true);
     }
-
     /**
-     * Логика вывода параметров задачи, и изменения этих параметров, включая удаление
-     * @param myTask - ссылка на задачу, которая изменяется
+     * output parameters of task and opportunity to change this parameters, including deleting
+     * @param myTask - link on the task, what will be changed
      */
     private void showAndEditTask(Task myTask){
         int index;
@@ -152,12 +151,11 @@ public class TaskController {
             editFile();
         }while(true);
     }
-
     /**
-     * находит ссылку на задачу, которую именно выбрал пользователь, когда просматривал календарь
-     * @param mymap SortedMap, которую возвращает метод Tasks.calendar
-     * @param index индекс таска, который выбрал пользователь
-     * @return ссылка на задачу, которую выбрал пользователь
+     * finds a link to the task, that the user chose, when was viewing the calendar
+     * @param mymap SortedMap,which returns the method  Tasks.calendar
+     * @param index the index of the task the user has chosen
+     * @return the link of the task the user has chosen
      */
     private Task inMapByIndex(SortedMap<Date, Set<Task>> mymap, int index){
         int i=1;
@@ -170,11 +168,10 @@ public class TaskController {
         }
         return null;
     }
-
     /**
-     * логика добавления задачи в лист
+     * logic of adding a task to the list
      */
-    public void addTask(){
+    private void addTask(){
         Task task = new Task();
         view.addTask();
         task.setTitle(view.changeTitle());
@@ -188,11 +185,10 @@ public class TaskController {
         editFile();
     }
     /**
-    Выход из программы - сообщение и закрытие myTaskThread потока
+     Exiting the program - message and closing the myTaskThread thread
      */
-    public void exit(){
+    private void exit(){
         myTaskThread.interrupt();
         view.exit();
     }
-
 }
