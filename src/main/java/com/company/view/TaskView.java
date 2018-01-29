@@ -9,18 +9,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Отвечает за текстовый вывод и взаимодействие с пользователем приложения
+ * Text output and interaction with the application user
  * @author olga
  * @version 1.0
  */
 
 public class TaskView {
-    /** Поле форматирования внешнего вида Даты для ввода/вывода*/
+    /** Field for formatting the view of the Date for input/output*/
     private static final SimpleDateFormat  formatForDate =
             new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    /** Вывод меню
-     * @return String - строку, которую ввел пользователь - обозначает определенный пункт в меню
-     * @param list - Tasklist с которым работает приложение
+    /** Menu output
+     * @return String - the string entered by the user - indicates a certain item in the menu
+     * @param list - Tasklist with which the application works
      * */
     public String menu(TaskList list) {
         System.out.println("\n");
@@ -70,11 +70,9 @@ public class TaskView {
     }
 
     /**
-     * Вывод сообщения о том, что пользователь удет просматривать календарь
-     * @param start ссылка на стартовую дату
-     * @param end ссылка на конечкую дату
-     *            в дальнейшем обьекты по ссылкам изменятся
-     *
+     * Displays a message that the user will see in the calendar
+     * @param start start date link
+     * @param end end date link
      */
     public void dateForCalendar(Date start, Date end){
         System.out.println("\n");
@@ -83,17 +81,15 @@ public class TaskView {
     }
 
     /**
-     * Вывод календаря за промежуток времени
-     * @param map ссылка на SortedMap, в котором хранятся задачи за введенны пользователем промежуток
-     * @return int индекст задачи, которую выбрал пользователь или 0 - возврат
+     * Display the calendar for a period of time
+     * @param map link on the SortedMap, in which the tasks are stored for the user-entered interval
+     * @return int the index of the task the user has chosen or 0 is the return
      */
     public int showCalendar(SortedMap<Date, Set<Task>> map){
         System.out.println("\n");
         int i=1;
         for(Map.Entry entry: map.entrySet()) {
-            //получить ключ
             Date key = (Date) entry.getKey();
-            //получить значение
             Set<Task> value = (Set<Task>) entry.getValue();
             System.out.println("Date: " + formatForDate.format(key));
             for (Object o: value) {
@@ -117,9 +113,9 @@ public class TaskView {
     }
 
     /**
-     * Вывод параметром задачи + меню в вариантами возможных изменений
-     * @param task задача, параметры которой выводят
-     * @return индекс для меню - обозначает какое изменение произойдет с задачей или выход
+     * Displays the task parameters + menu options in the variants of possible changes
+     * @param task  whose parameters will be displayed
+     * @return index for the menu - indicates which change will occur with the task or exit
      */
     public int showTask(Task task){
         System.out.println("\n");
@@ -145,25 +141,24 @@ public class TaskView {
     }
 
     /**
-     *Вывод удаления задачи
-     * @return 0 если пользователь не будет удалять задачу, 1 - будет
+     * Display deleting the task
+     * @return true - user will be deleting, false - no
      */
     public boolean deletingTask(){
         System.out.println("Are you sure you want to delete this Task?");
        return yesOrNo();
-
     }
 
     /**
-     * Приветствие
+     * Startig the app
      */
     public void welcome(){
         System.out.println("Welcome to our app!");
     }
     /**
-     * Дает пользователю ввести 2 даты, используется при редактировании задачи, создании новой и показе календаря
-     * @param start первая дата, которую введет пользователь
-     * @param end вторая
+     * Allows the user to enter 2 dates, used when editing a task, creating a new one, and displaying the calendar
+     * @param start the start  date the user enters
+     * @param end the end one
      */
     public void changeDate(Date start, Date end){
         while(true) {
@@ -279,9 +274,9 @@ public class TaskView {
     }
 
     /**
-     * Метод для ввода interval в определенном вормате, удобном для пользователя
-     * 1 day 10 hour 17 minute 36 second
-     * @return значение интервала в секундах - int
+     * Method for inputing interval in definite format, the most comfortable for user
+     * like 1 day 10 hour 17 minute 36 second
+     * @return value of the interval in seconds - int
      */
     public int changeInterval(){
         System.out.print("Enter interval like - 1 day 10 hour 17 minute 36 second: ");
@@ -299,9 +294,9 @@ public class TaskView {
     }
 
     /**
-     * Изменяет входной параметр на противоположный и оповещает пользователя о том активным или неактивным стала задача
-     * @param b - булевая переменная, обозначает активная или нет задача
-     * @return будевое значение, противоположное b
+     * Changes the input parameter to the opposite one and notifies the user whether the task has become active or inactive
+     * @param b - Boolean, indicates whether the task is active or not
+     * @return boolean value, the opposite of b
      */
     public boolean changeActive(boolean b){
         b = !b;
@@ -314,8 +309,8 @@ public class TaskView {
     }
 
     /**
-     * Метод для ввода активности таска, если пользователь введет 1 - активный, 0 - неактивный
-     * @return boolean -true, если таск активный, false - неактивный
+     * The method for entering the activity of the task, if the user enters 1 - active, 0 - inactive
+     * @return boolean -true, task is active false - inactive
      */
     public boolean setActive(){
         do {
@@ -330,22 +325,22 @@ public class TaskView {
     }
 
     /**
-     * Выводит пользователю сообщение о том, что ему нужно ввести данные о задаче
+     * Displays a message to the user, that he needs to enter the task data
      */
     public void addTask(){
         System.out.println("\nEnter data about your new Task: ");
     }
 
     /**
-     * Выводит пользователю о выходе с программы
+     * Displays the user's exit from the program
      */
     public void exit(){
         System.out.print("\nThank you for using our application.");
     }
 
     /**
-     * статический метод, который задействует Scanner для ввоода строки
-     * @return введенную пользователем строку
+     * A static method that uses Scanner for input string
+     * @return the String, has entering by user
      */
     private static String inputString() {
         Scanner sc = new Scanner(System.in);
@@ -360,8 +355,8 @@ public class TaskView {
     }
 
     /**
-     * статический метод для ввода индекса для меню - только интовское число
-     * @return -1, если возникло исключение(пользователь ввел некорректные данные) или int, который ввел пользователь
+     * A static method that uses Scanner for input int value
+     * @return -1, if an exception occurred (the user entered incorrect data) or int, has entered by user
      */
     private static int inputIndex() {
         Scanner sc = new Scanner(System.in);
